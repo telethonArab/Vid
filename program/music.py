@@ -52,7 +52,7 @@ async def play(c: Client, m: Message):
         ]
     )
     if m.sender_chat:
-        return await m.reply_text("you're an __Anonymous__ Admin !\n\n» revert back to user account from admin rights.")
+        return await m.reply_text("عذرا انت لست ادمن.")
     try:
         aing = await c.get_me()
     except Exception as e:
@@ -60,12 +60,12 @@ async def play(c: Client, m: Message):
     a = await c.get_chat_member(chat_id, aing.id)
     if a.status != "administrator":
         await m.reply_text(
-            f"💡 To use me, I need to be an **Administrator** with the following **permissions**:\n\n» ❌ __Delete messages__\n» ❌ __Add users__\n» ❌ __Manage video chat__\n\nData is **updated** automatically after you **promote me**"
+            f"💡 يجب ان ترفعني مشرف بكامل الصلاحيات في المجموعة"
         )
         return
     if not a.can_manage_voice_chats:
         await m.reply_text(
-            "missing required permission:" + "\n\n» ❌ __Manage video chat__"
+            "عذرا الطلب مفقود :" + "\n\n» ❌ __Manage video chat__"
         )
         return
     if not a.can_delete_messages:
@@ -89,7 +89,7 @@ async def play(c: Client, m: Message):
             try:
                 await user.join_chat(m.chat.username)
             except Exception as e:
-                await m.reply_text(f"❌ **فشل حساب المساعد في الانضمام 🙂**\n\n**reason**: `{e}`")
+                await m.reply_text(f"❌ **فشل حساب المساعد في الانضمام **\n\n**reason**: `{e}`")
                 return
         else:
             try:
@@ -105,11 +105,11 @@ async def play(c: Client, m: Message):
                 pass
             except Exception as e:
                 return await m.reply_text(
-                    f"❌ **فشل حساب المساعد في الانضمام 🙂**\n\n**reason**: `{e}`"
+                    f"❌ **فشل حساب المساعد في الانضمام **\n\n**reason**: `{e}`"
                 )
     if replied:
         if replied.audio or replied.voice:
-            suhu = await replied.reply("📥 **downloading audio...**")
+            suhu = await replied.reply("📥 **جاري التحميل ...**")
             dl = await replied.download()
             link = replied.link
             if replied.audio:
@@ -127,7 +127,7 @@ async def play(c: Client, m: Message):
                 await suhu.delete()
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({link}) | `اغنية`\n💭 **شات:** `{chat_id}`\n🎧 **مطلوبه بواسطة:** {m.from_user.mention()}",
+                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({link}) | `صوتية`\n💭 **شات:** `{chat_id}`\n🔊 **مطلوبه بواسطة:** {m.from_user.mention()}",
                     reply_markup=keyboard,
                 )
             else:
@@ -145,7 +145,7 @@ async def play(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_2}",
-                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
+                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `يلعب`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
                     reply_markup=keyboard,
                 )
              except Exception as e:
@@ -157,7 +157,7 @@ async def play(c: Client, m: Message):
                     "» الرد علي **ملف صوتي** او **إعطاء شيء للبحث.**"
                 )
             else:
-                suhu = await c.send_message(chat_id, "🔍 **جاري البحث ياحب..🙂💕...**")
+                suhu = await c.send_message(chat_id, "🔍 **جاري البحث .....**")
                 query = m.text.split(None, 1)[1]
                 search = ytsearch(query)
                 if search == 0:
@@ -180,12 +180,12 @@ async def play(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=thumbnail,
-                                caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `اغنية`\n**⏱ الوقت:** `{duration}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                                caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `صوتية`\n**⏱ الوقت:** `{duration}`\n🔊 **مطلوبه بواسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         else:
                             try:
-                                await suhu.edit("🔄 **تم التشغيل 💕**")
+                                await suhu.edit("🔄 **تم التشغيل **")
                                 await call_py.join_group_call(
                                     chat_id,
                                     AudioPiped(
@@ -198,7 +198,7 @@ async def play(c: Client, m: Message):
                                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                                 await m.reply_photo(
                                     photo=thumbnail,
-                                    caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
+                                    caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
                                     reply_markup=keyboard,
                                 )
                             except Exception as ep:
@@ -211,7 +211,7 @@ async def play(c: Client, m: Message):
                 "» الرد علي **ملف صوتي** او **إعطاء شيء للبحث.**"
             )
         else:
-            suhu = await c.send_message(chat_id, "🔍 **جاري البحث ياحب..🙂💕...**")
+            suhu = await c.send_message(chat_id, "🔍 **جاري البحث .....**")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search == 0:
@@ -234,12 +234,12 @@ async def play(c: Client, m: Message):
                         )
                         await m.reply_photo(
                             photo=thumbnail,
-                            caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `اغنية`\n**⏱ الوقت:** `{duration}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                            caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `صوتية`\n**⏱ الوقت:** `{duration}`\n🔊 **مطلوبه بواسطة:** {requester}",
                             reply_markup=keyboard,
                         )
                     else:
                         try:
-                            await suhu.edit("🔄 **تم التشغيل 💕**")
+                            await suhu.edit("🔄 **تم التشغيل **")
                             await call_py.join_group_call(
                                 chat_id,
                                 AudioPiped(
@@ -252,7 +252,7 @@ async def play(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=thumbnail,
-                                caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
+                                caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
                                 reply_markup=keyboard,
                             )
                         except Exception as ep:
