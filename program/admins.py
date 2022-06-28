@@ -34,11 +34,11 @@ async def update_admin(client, message):
         new_admins.append(u.user.id)
     admins[message.chat.id] = new_admins
     await message.reply_text(
-        "✅ Bot **reloaded correctly !**\n✅ **Admin list** has **updated !**"
+        "✅ تم تحديث بنجاح"
     )
 
 
-@Client.on_message(command(["skip", f"skip@{BOT_USERNAME}", "vskip", "هات اللي بعدو"]) & other_filters)
+@Client.on_message(command(["التالي", f"skip@{BOT_USERNAME}", "vskip", "هات اللي بعدو"]) & other_filters)
 @authorized_users_only
 async def skip(client, m: Message):
 
@@ -59,15 +59,15 @@ async def skip(client, m: Message):
     if len(m.command) < 2:
         op = await skip_current_song(chat_id)
         if op == 0:
-            await m.reply("❌ nothing is currently playing")
+            await m.reply("❌ لاشيئ شغال حاليا")
         elif op == 1:
-            await m.reply("✅ __Queues__ **is empty.**\n\n**• userbot leaving voice chat**")
+            await m.reply("✅ حسنا .**\n\n**• userbot leaving voice chat**")
         elif op == 2:
-            await m.reply("🗑️ **Clearing the Queues**\n\n**• userbot leaving voice chat**")
+            await m.reply("🗑️ **جاري التنضيف**\n\n**• و ايضا مغادره البوت من الاتصال**")
         else:
             await m.reply_photo(
                 photo=f"{IMG_3}",
-                caption=f"⏭ **تم التخطي إلى المسار التالي.**\n\n🏷 **اسم:** [{op[0]}]({op[1]})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {m.from_user.mention()}",
+                caption=f"⏭ **تم التخطي إلى المسار التالي.**\n\n🏷 **اسم:** [{op[0]}]({op[1]})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `شغال`\n **مطلوبه بواسطة:** {m.from_user.mention()}",
                 reply_markup=keyboard,
             )
     else:
@@ -89,7 +89,7 @@ async def skip(client, m: Message):
 
 
 @Client.on_message(
-    command(["stop", f"stop@{BOT_USERNAME}", "end", f"end@{BOT_USERNAME}", "vstop", "وقف"])
+    command(["stop", f"stop@{BOT_USERNAME}", "ايقاف", f"end@{BOT_USERNAME}", "vstop", "وقف"])
     & other_filters
 )
 @authorized_users_only
@@ -99,15 +99,15 @@ async def stop(client, m: Message):
         try:
             await call_py.leave_group_call(chat_id)
             clear_queue(chat_id)
-            await m.reply("✅ The userbot has disconnected from the video chat.")
+            await m.reply("✅ حسنا تم الايقاف.")
         except Exception as e:
-            await m.reply(f"🚫 **error:**\n\n`{e}`")
+            await m.reply(f"🚫 **هناك خطا:**\n\n`{e}`")
     else:
-        await m.reply("❌ **nothing is streaming**")
+        await m.reply("❌ **لايوجد شيئ**")
 
 
 @Client.on_message(
-    command(["pause", f"pause@{BOT_USERNAME}", "vpause", "اقفل شاشه"]) & other_filters
+    command(["استئناف", f"pause@{BOT_USERNAME}", "vpause", "اقفل شاشه"]) & other_filters
 )
 @authorized_users_only
 async def pause(client, m: Message):
@@ -116,16 +116,16 @@ async def pause(client, m: Message):
         try:
             await call_py.pause_stream(chat_id)
             await m.reply(
-                "⏸ **Track paused.**\n\n• **To resume the stream, use the**\n» /resume command."
+                "⏸ **حسنا تم الاستئناف.**."
             )
         except Exception as e:
-            await m.reply(f"🚫 **error:**\n\n`{e}`")
+            await m.reply(f"🚫 **خطا :**\n\n`{e}`")
     else:
-        await m.reply("❌ **nothing in streaming**")
+        await m.reply("❌ **لاشيئ شغال**")
 
 
 @Client.on_message(
-    command(["resume", f"resume@{BOT_USERNAME}", "vresume", "شغل شاشه"]) & other_filters
+    command(["اعاده تشغيل", f"resume@{BOT_USERNAME}", "vresume", "شغل شاشه"]) & other_filters
 )
 @authorized_users_only
 async def resume(client, m: Message):
@@ -134,16 +134,16 @@ async def resume(client, m: Message):
         try:
             await call_py.resume_stream(chat_id)
             await m.reply(
-                "▶️ **Track resumed.**\n\n• **To pause the stream, use the**\n» /pause command."
+                "▶️ تم اعاده التشغيل."
             )
         except Exception as e:
-            await m.reply(f"🚫 **error:**\n\n`{e}`")
+            await m.reply(f"🚫 **هناك خطا :**\n\n`{e}`")
     else:
-        await m.reply("❌ **nothing in streaming**")
+        await m.reply("❌ **لايوجد شيئ شغال**")
 
 
 @Client.on_message(
-    command(["mute", f"mute@{BOT_USERNAME}", "vmute", "شد ميوت"]) & other_filters
+    command(["كتم", f"mute@{BOT_USERNAME}", "vmute", "شد ميوت"]) & other_filters
 )
 @authorized_users_only
 async def mute(client, m: Message):
@@ -152,16 +152,16 @@ async def mute(client, m: Message):
         try:
             await call_py.mute_stream(chat_id)
             await m.reply(
-                "🔇 **Userbot muted.**\n\n• **To unmute the userbot, use the**\n» /unmute command."
+                "🔇 **تم الكتم.**\n\n• **To unmute the userbot, use the**\n» /unmute command."
             )
         except Exception as e:
-            await m.reply(f"🚫 **error:**\n\n`{e}`")
+            await m.reply(f"🚫 **خطا:**\n\n`{e}`")
     else:
-        await m.reply("❌ **nothing in streaming**")
+        await m.reply("❌ **لايوجد شيئ**")
 
 
 @Client.on_message(
-    command(["unmute", f"unmute@{BOT_USERNAME}", "vunmute", "فك ميوت"]) & other_filters
+    command(["الغاء كتم", f"unmute@{BOT_USERNAME}", "vunmute", "فك ميوت"]) & other_filters
 )
 @authorized_users_only
 async def unmute(client, m: Message):
@@ -170,12 +170,12 @@ async def unmute(client, m: Message):
         try:
             await call_py.unmute_stream(chat_id)
             await m.reply(
-                "🔊 **Userbot unmuted.**\n\n• **To mute the userbot, use the**\n» /mute command."
+                "🔊 **تم الغاء كتم .**\n\n• **To mute the userbot, use the**\n» /mute command."
             )
         except Exception as e:
-            await m.reply(f"🚫 **error:**\n\n`{e}`")
+            await m.reply(f"🚫 **خطا :**\n\n`{e}`")
     else:
-        await m.reply("❌ **nothing in streaming**")
+        await m.reply("❌ **لايوجد شيئ شغال**")
 
 
 @Client.on_callback_query(filters.regex("cbpause"))
@@ -184,7 +184,7 @@ async def cbpause(_, query: CallbackQuery):
         return await query.answer("you're an Anonymous Admin !\n\n» revert back to user account from admin rights.")
     a = await _.get_chat_member(query.message.chat.id, query.from_user.id)
     if not a.can_manage_voice_chats:
-        return await query.answer("💡 only admin with manage voice chats permission that can tap this button !", show_alert=True)
+        return await query.answer("💡  يجب ان ترفعني مشرف هنا ", show_alert=True)
     chat_id = query.message.chat.id
     if chat_id in QUEUE:
         try:
@@ -294,3 +294,5 @@ async def change_volume(client, m: Message):
             await m.reply(f"🚫 **error:**\n\n`{e}`")
     else:
         await m.reply("❌ **nothing in streaming**")
+
+
