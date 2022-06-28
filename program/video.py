@@ -54,7 +54,7 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command(["vplay", f"vplay@{BOT_USERNAME}", "لايف"]) & other_filters)
+@Client.on_message(command(["تشغيل فيديو", f"vplay@{BOT_USERNAME}", "لايف"]) & other_filters)
 async def vplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
@@ -67,7 +67,7 @@ async def vplay(c: Client, m: Message):
         ]
     )
     if m.sender_chat:
-        return await m.reply_text("you're an __Anonymous__ Admin !\n\n» revert back to user account from admin rights.")
+        return await m.reply_text("عزيزي انت لست ادمن.")
     try:
         aing = await c.get_me()
     except Exception as e:
@@ -125,7 +125,7 @@ async def vplay(c: Client, m: Message):
 
     if replied:
         if replied.video or replied.document:
-            loser = await replied.reply("📥 **downloading video...**")
+            loser = await replied.reply("📥 **جاري تحميل الفيديو...**")
             dl = await replied.download()
             link = replied.link
             if len(m.command) < 2:
@@ -163,7 +163,7 @@ async def vplay(c: Client, m: Message):
                     amaze = MediumQualityVideo()
                 elif Q == 360:
                     amaze = LowQualityVideo()
-                await loser.edit("🔄 **انتظر من فضلك 💕...**")
+                await loser.edit("🔄 **انتظر من فضلك ...**")
                 await call_py.join_group_call(
                     chat_id,
                     AudioVideoPiped(
@@ -296,7 +296,7 @@ async def vplay(c: Client, m: Message):
                             await m.reply_text(f"🚫 error: `{ep}`")
 
 
-@Client.on_message(command(["vstream", f"vstream@{BOT_USERNAME}", "فيديو استريم"]) & other_filters)
+@Client.on_message(command(["بث مباشر", f"vstream@{BOT_USERNAME}", "فيديو استريم"]) & other_filters)
 async def vstream(c: Client, m: Message):
     await m.delete()
     chat_id = m.chat.id
