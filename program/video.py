@@ -54,7 +54,7 @@ async def ytdl(link):
         return 0, stderr.decode()
 
 
-@Client.on_message(command(["تشغيل فيديو", f"vplay@{BOT_USERNAME}", "لايف"]) & other_filters)
+@Client.on_message(command(["فيديو تشغيل", f"vplay@{BOT_USERNAME}", "لايف"]) & other_filters)
 async def vplay(c: Client, m: Message):
     replied = m.reply_to_message
     chat_id = m.chat.id
@@ -75,7 +75,7 @@ async def vplay(c: Client, m: Message):
     a = await c.get_chat_member(chat_id, aing.id)
     if a.status != "administrator":
         await m.reply_text(
-            f"💡 To use me, I need to be an **Administrator** with the following **permissions**:\n\n» ❌ __Delete messages__\n» ❌ __Add users__\n» ❌ __Manage video chat__\n\nData is **updated** automatically after you **promote me**"
+            f"**💡 تحتاج صلاحيه ادمن **"
         )
         return
     if not a.can_manage_voice_chats:
