@@ -87,7 +87,7 @@ def song(_, message):
 
 
 @Client.on_message(
-    command(["تحميل فيديو", f"vsong@{bn}", "video", f"video@{bn}"]) & ~filters.edited
+    command(["تحميل_فيديو", f"vsong@{bn}", "video", f"video@{bn}"]) & ~filters.edited
 )
 async def vsong(client, message):
     ydl_opts = {
