@@ -153,7 +153,7 @@ async def vplay(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({link}) | `فيديو`\n💭 **شات:** `{chat_id}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({link}) | `فيديو`\n💭 **شات:** `{chat_id}`\n **مطلوبه بواسطة:** {requester}",
                     reply_markup=keyboard,
                 )
             else:
@@ -178,7 +178,7 @@ async def vplay(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_2}",
-                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
+                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `شغال`\n **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
                     reply_markup=keyboard,
                 )
         else:
@@ -187,7 +187,7 @@ async def vplay(c: Client, m: Message):
                     "» الرد علي **ملف فيديو** او **إعطاء شيء للبحث.**"
                 )
             else:
-                loser = await c.send_message(chat_id, "🔍 **جاري البحث 💕...**")
+                loser = await c.send_message(chat_id, "🔍 **جاري البحث ...**")
                 query = m.text.split(None, 1)[1]
                 search = ytsearch(query)
                 Q = 720
@@ -211,12 +211,12 @@ async def vplay(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=thumbnail,
-                                caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `فيديو`\n⏱ **الوقت:** `{duration}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                                caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `فيديو`\n⏱ **الوقت:** `{duration}`\n **مطلوبه بواسطة:** {requester}",
                                 reply_markup=keyboard,
                             )
                         else:
                             try:
-                                await loser.edit("🔄 **انتظر من فضلك 💕...**")
+                                await loser.edit("🔄 **انتظر من فضلك ...**")
                                 await call_py.join_group_call(
                                     chat_id,
                                     AudioVideoPiped(
@@ -231,7 +231,7 @@ async def vplay(c: Client, m: Message):
                                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                                 await m.reply_photo(
                                     photo=thumbnail,
-                                    caption=f"🏷 **اسم:** [{songname}]({url})\n⏱ **الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
+                                    caption=f"🏷 **اسم:** [{songname}]({url})\n⏱ **الوقت:** `{duration}`\n💡 **حالة:** `شغال`\n **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
                                     reply_markup=keyboard,
                                 )
                             except Exception as ep:
@@ -244,7 +244,7 @@ async def vplay(c: Client, m: Message):
                 "» الرد علي **ملف فيديو** او **إعطاء شيء للبحث.**"
             )
         else:
-            loser = await c.send_message(chat_id, "🔍 **جاري البحث 💕...**")
+            loser = await c.send_message(chat_id, "🔍 **جاري البحث ...**")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             Q = 720
@@ -268,12 +268,12 @@ async def vplay(c: Client, m: Message):
                         )
                         await m.reply_photo(
                             photo=thumbnail,
-                            caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `فيديو`\n⏱ **الوقت:** `{duration}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                            caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n🏷 **اسم:** [{songname}]({url}) | `فيديو`\n⏱ **الوقت:** `{duration}`\n **مطلوبه بواسطة:** {requester}",
                             reply_markup=keyboard,
                         )
                     else:
                         try:
-                            await loser.edit("🔄 **انتظر من فضلك 💕...**")
+                            await loser.edit("🔄 **انتظر من فضلك ...**")
                             await call_py.join_group_call(
                                 chat_id,
                                 AudioVideoPiped(
@@ -288,7 +288,7 @@ async def vplay(c: Client, m: Message):
                             requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                             await m.reply_photo(
                                 photo=thumbnail,
-                                caption=f"🏷 **اسم:** [{songname}]({url})\n⏱ **الوقت:** `{duration}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
+                                caption=f"🏷 **اسم:** [{songname}]({url})\n⏱ **الوقت:** `{duration}`\n💡 **حالة:** `شغال`\n **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Video`",
                                 reply_markup=keyboard,
                             )
                         except Exception as ep:
@@ -371,7 +371,7 @@ async def vstream(c: Client, m: Message):
         if len(m.command) == 2:
             link = m.text.split(None, 1)[1]
             Q = 720
-            loser = await c.send_message(chat_id, "🔄 **جاري المعالجه 💕...**")
+            loser = await c.send_message(chat_id, "🔄 **جاري المعالجه ...**")
         elif len(m.command) == 3:
             op = m.text.split(None, 1)[1]
             link = op.split(None, 1)[0]
@@ -383,7 +383,7 @@ async def vstream(c: Client, m: Message):
                 await m.reply(
                     "» __only 720, 480, 360 allowed__ \n💡 **الآن يتدفقون الفيديو بدقة 720 بكسل**"
                 )
-            loser = await c.send_message(chat_id, "🔄 **جاري المعالجه 💕...**")
+            loser = await c.send_message(chat_id, "🔄 **جاري المعالجه ...**")
         else:
             await m.reply("**/vstream {link} {720/480/360}**")
 
@@ -404,7 +404,7 @@ async def vstream(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_1}",
-                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n💭 **شات:** `{chat_id}`\n🎧 **مطلوبه بواسطة:** {requester}",
+                    caption=f"💡 **تمت إضافة المسار إلى قائمة الانتظار »** `{pos}`\n\n💭 **شات:** `{chat_id}`\n **مطلوبه بواسطة:** {requester}",
                     reply_markup=keyboard,
                 )
             else:
@@ -415,7 +415,7 @@ async def vstream(c: Client, m: Message):
                 elif Q == 360:
                     amaze = LowQualityVideo()
                 try:
-                    await loser.edit("🔄 **انتظر من فضلك 💕...**")
+                    await loser.edit("🔄 **انتظر من فضلك ...**")
                     await call_py.join_group_call(
                         chat_id,
                         AudioVideoPiped(
@@ -432,7 +432,7 @@ async def vstream(c: Client, m: Message):
                     )
                     await m.reply_photo(
                         photo=f"{IMG_2}",
-                        caption=f"💡 **[فيديو مباشر]({link}) stream started.**\n\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `يلعب`\n🎧 **مطلوبه بواسطة:** {requester}",
+                        caption=f"💡 **[فيديو مباشر]({link}) stream started.**\n\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `شغال`\n **مطلوبه بواسطة:** {requester}",
                         reply_markup=keyboard,
                     )
                 except Exception as ep:
