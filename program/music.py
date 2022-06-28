@@ -145,7 +145,7 @@ async def play(c: Client, m: Message):
                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                 await m.reply_photo(
                     photo=f"{IMG_2}",
-                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `شغال`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
+                    caption=f"🏷 **اسم:** [{songname}]({link})\n💭 **شات:** `{chat_id}`\n💡 **حالة:** `شغال`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** صوتي",
                     reply_markup=keyboard,
                 )
              except Exception as e:
@@ -198,7 +198,7 @@ async def play(c: Client, m: Message):
                                 requester = f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
                                 await m.reply_photo(
                                     photo=thumbnail,
-                                    caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `شغال`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** `Music`",
+                                    caption=f"🏷 **اسم:** [{songname}]({url})\n**⏱ الوقت:** `{duration}`\n💡 **حالة:** `شغال`\n🔊 **مطلوبه بواسطة:** {requester}\n📹 **نوع الدفق:** صوتي",
                                     reply_markup=keyboard,
                                 )
                             except Exception as ep:
